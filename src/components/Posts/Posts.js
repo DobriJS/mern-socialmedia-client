@@ -9,7 +9,7 @@ const Posts = () => {
   const classes = useStyles();
 
   return (
-    <Grid className={classes.container}>
+    <Grid className={classes.mainContainer}>
       <Post />
     </Grid>
   );
