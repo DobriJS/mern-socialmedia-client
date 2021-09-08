@@ -47,7 +47,6 @@ const Form = ({ currentId, setCurrentId }) => {
           fullWidth
           value={postData.creator}
           onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
-
         <TextField
           name="title"
           variant="outlined"
