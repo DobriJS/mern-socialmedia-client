@@ -35,7 +35,7 @@ const Form = ({ currentId }) => {
         noValidate
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}>
-        <Typography variant='h6'>Create a Feed</Typography>
+        <Typography variant='h6'>{currentId ? 'Editing' : 'Creating'} a Post</Typography>
         <TextField
           name="creator"
           variant="outlined"
