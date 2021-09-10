@@ -18,4 +18,9 @@ export default makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
   },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    width: '400px',
+  },
 }));
