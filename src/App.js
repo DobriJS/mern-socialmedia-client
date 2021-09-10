@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
+import { Container, Grow, Grid } from '@material-ui/core';
 import { getPosts } from './actions/posts';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
-import useStyles from './styles';
 
 const App = () =>  {
   const [currentId, setCurrentId] = useState(0);
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,11 +15,7 @@ const App = () =>  {
 
   return (
     <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} variant="h2" align="center">
-          Feed
-        </Typography>
-      </AppBar>
+
       <Grow in>
         <Container>
           <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
