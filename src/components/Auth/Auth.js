@@ -1,21 +1,39 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
+import { signin, signup } from '../../actions/auth';
 import useStyles from './styles';
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   const switchMode = () => {
+    setForm(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
+    setShowPassword(false);
   };
 
-  const handleChange = () => {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignup) {
+      dispatch(signup(form, history));
+    } else {
+      dispatch(signin(form, history));
+    }
   };
 
   return (
@@ -25,7 +43,7 @@ const Auth = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
-        <form className={classes.form} >
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             { isSignup && (
               <>
