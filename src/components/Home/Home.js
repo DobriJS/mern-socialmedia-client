@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
-import ChipInput from 'material-ui-chip-input';
+import { ChipInput } from '@material-ui/core';
 import { getPosts } from '../../actions/posts';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
