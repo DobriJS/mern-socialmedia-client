@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
-import Chip from '@material-ui/core/Chip';
+import ChipInput from 'material-ui-chip-input';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 import Pagination from '../Pagination/Pagination';
@@ -51,7 +51,7 @@ const Home = () => {
   return (
     <Grow in>
       <Container maxWidth='xl'>
-        <Grid container justifyContent="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+        <Grid container className={classes.gridContainer} justifyContent="space-between" alignItems="stretch" spacing={3} >
           <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
@@ -64,9 +64,9 @@ const Home = () => {
                 label='Search Posts'
                 fullWidth
                 value={search}
-                onchange={(e) => setSearch(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <Chip
+              <ChipInput
                 style={{ margin: '10px 0' }}
                 value={tags}
                 onAdd={(chip) => handleAddChip(chip)}
@@ -76,10 +76,11 @@ const Home = () => {
               />
               <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
             </AppBar>
-            <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper elevation={6}>
-              <Pagination />
-            </Paper>
+            {(!searchQuery && !tags.length) && (
+              <Paper className={classes.pagination} elevation={6}>
+                <Pagination page={page} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>
