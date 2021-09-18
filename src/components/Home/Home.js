@@ -1,13 +1,13 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
 import ChipInput from 'material-ui-chip-input';
+
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 import Pagination from '../Pagination/Pagination';
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 const useQuery = () => {
@@ -16,19 +16,15 @@ const useQuery = () => {
 
 const Home = () => {
   const classes = useStyles();
-  const [currentId, setCurrentId] = useState(0);
-  const [search, setSearch] = useState('');
-  const [tags, setTags] = useState([]);
-
   const dispatch = useDispatch();
   const history = useHistory();
   const query = useQuery();
-  const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
+  const page = query.get('page') || 1;
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
+  const [currentId, setCurrentId] = useState(0);
+  const [search, setSearch] = useState('');
+  const [tags, setTags] = useState([]);
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -50,22 +46,14 @@ const Home = () => {
 
   return (
     <Grow in>
-      <Container maxWidth='xl'>
-        <Grid container className={classes.gridContainer} justifyContent="space-between" alignItems="stretch" spacing={3} >
+      <Container maxWidth="xl">
+        <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <AppBar className={classes.appBarSearch} positions='static' color='inherit'>
-              <TextField
-                name='search'
-                variant='outlined'
-                onKeyPress={handleKeyPress}
-                label='Search Posts'
-                fullWidth
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+            <AppBar className={classes.appBarSearch} position="static" color="inherit">
+              <TextField onKeyDown={handleKeyPress} name="search" variant="outlined" label="Search Memories" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} />
               <ChipInput
                 style={{ margin: '10px 0' }}
                 value={tags}
@@ -76,6 +64,7 @@ const Home = () => {
               />
               <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
             </AppBar>
+            <Form currentId={currentId} setCurrentId={setCurrentId} />
             {(!searchQuery && !tags.length) && (
               <Paper className={classes.pagination} elevation={6}>
                 <Pagination page={page} />
