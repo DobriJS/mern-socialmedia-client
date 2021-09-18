@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -30,8 +31,9 @@ const Home = () => {
   }, [currentId, dispatch]);
 
   const searchPost = () => {
-    if (search.trim()) {
+    if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
+      history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
     } else {
       history.push('/');
     }
