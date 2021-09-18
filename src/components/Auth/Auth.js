@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { GoogleLogin } from 'react-google-login';
+
 import Input from './Input';
 import { signin, signup } from '../../actions/auth';
-import { GoogleLogin } from 'react-google-login';
 import { AUTH } from '../../constants/actionTypes';
 import Icon from './icon';
 import useStyles from './styles';
@@ -55,7 +56,7 @@ const Auth = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={3}>
+      <Paper className={classes.paper} elevation={6}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
