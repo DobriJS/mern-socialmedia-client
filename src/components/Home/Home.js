@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
-import { getPosts } from '../../actions/posts';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 import Pagination from '../Pagination/Pagination';
+import { getPosts, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 const useQuery = () => {
@@ -31,7 +31,7 @@ const Home = () => {
 
   const searchPost = () => {
     if (search.trim()) {
-    // fetch search post
+      dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
     } else {
       history.push('/');
     }
