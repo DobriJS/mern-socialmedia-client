@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 
-import { deletePost, likePost } from '../../../actions/posts';
+import { deletePost, likePost, getPost } from '../../../actions/posts';
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
@@ -29,6 +29,7 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const openPost = () => {
+    dispatch(getPost(post._id, history));
     history.push(`/posts/${post._id}`);
   };
 
