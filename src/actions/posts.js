@@ -4,9 +4,9 @@ import * as api from '../api/index.js';
 export const getPosts = (page) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_START });
-    const { data } = await api.fetchPosts(page);
+    const { data: { data, currentPage, numberOfPages } } = await api.fetchPosts(page);
 
-    dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: FETCH_ALL, payload: { data, currentPage, numberOfPages } });
     dispatch({ type: LOADING_END });
   } catch (error) {
     console.log(error.message);
@@ -17,6 +17,7 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_START });
     const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+
     dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
     dispatch({ type: LOADING_END });
   } catch (error) {
