@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
 
-import defaultImg from '../../assets/defimg.png';
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
@@ -35,7 +34,7 @@ const PostDetails = () => {
     }
 
   const openPost = (_id) => history.push(`/posts/${_id}`);
-  const recommendedPosts = posts?.filter(({ _id }) => _id !== post._id);
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -69,7 +68,8 @@ const PostDetails = () => {
         <div className={classes.imageSection}>
           <img
             className={classes.media}
-            src={post.selectedFile ? post.selectedFile : defaultImg}
+            src={post?.selectedFile ||
+							'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
             alt={post?.title} />
         </div>
       </div>

@@ -23,7 +23,8 @@ const Navbar = () => {
     const token = user?.token;
     if (token) {
       const decodedToken = decode(token);
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+      if (decodedToken.exp * 1000 < new Date().getTime())
+        logout();
     }
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
@@ -41,25 +42,25 @@ const Navbar = () => {
         </Typography>
       </div>
       <Toolbar className={classes.toolbar}>
-        {user?.result ? (
+        {user ? (
           <div className={classes.profile}>
             <Avatar
               className={classes.purple}
-              alt={user?.result.name}
-              src={user?.result.imageUrl}>
-              {user?.result.name.charAt(0)}
+              alt={user.result.name}
+              src={user.result.imageUrl}
+            >
+              {user.result.name.charAt(0)}
             </Avatar>
-            <Typography
-              className={classes.userName}
-              variant="h6">
-              {user?.result.name}
+            <Typography className={classes.userName} variant="h6">
+              {user.result.name}
             </Typography>
             <Button
               variant="contained"
               className={classes.logout}
               color="secondary"
-              onClick={logout}>
-              Logout
+              onClick={logout}
+            >
+							Logout
             </Button>
           </div>
         ) : (
@@ -67,8 +68,9 @@ const Navbar = () => {
             component={Link}
             to="/auth"
             variant="contained"
-            color="primary">
-            Sign In
+            color="primary"
+          >
+						Sign in
           </Button>
         )}
       </Toolbar>
