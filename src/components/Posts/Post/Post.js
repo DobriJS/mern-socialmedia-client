@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import useStyles from './styles';
 
+import defaultImg from '../../../assets/defimg.png';
 import { deletePost, likePost } from '../../../actions/posts';
 
 const Post = ({ post, setCurrentId }) => {
@@ -21,18 +22,25 @@ const Post = ({ post, setCurrentId }) => {
     if (post.likes.length > 0) {
       return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
         ? (
-          <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
+          <>
+            <ThumbUpAltIcon fontSize="small" />
+            &nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }
+          </>
         ) : (
-          <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
+          <>
+            <ThumbUpAltOutlined fontSize="small" />
+            &nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+          </>
         );
     }
-
-    return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
+    return (
+      <>
+        <ThumbUpAltOutlined fontSize="small" />&nbsp;Like
+      </>
+    );
   };
 
-  const openPost = () => {
-    history.push(`/posts/${post._id}`);
-  };
+  const openPost = () => history.push(`/posts/${post._id}`);
 
   return (
     <Card className={classes.card} raised elevation={6}>
@@ -44,27 +52,33 @@ const Post = ({ post, setCurrentId }) => {
       >
         <CardMedia
           className={classes.media}
-          image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
+          image={post.selectedFile ? post.selectedFile : defaultImg}
           title={post.title}
         />
         <div className={classes.overlay}>
-          <Typography variant="h6">{post.name}</Typography>
-          <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+          <Typography variant="h6">
+            {post.name}
+          </Typography>
+          <Typography variant="body2">
+            {moment(post.createdAt).fromNow()}
+          </Typography>
         </div>
-        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-          <div className={classes.overlay2} name="edit">
+
+        <div className={classes.overlay2}>
+          {(user?.result?.googleId === post?.creator ||
+						user?.result?._id === post?.creator) && (
             <Button
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrentId(post._id);
-              }}
               style={{ color: 'white' }}
               size="small"
+              onClick={() => {
+                setCurrentId(post._id);
+              }}
             >
-              <MoreHorizIcon fontSize="default" />
+              <MoreHorizIcon fontSize="medium" />
             </Button>
-          </div>
-        )}
+          )}
+        </div>
+
         <div className={classes.details}>
           <Typography
             variant="body2"
@@ -84,7 +98,7 @@ const Post = ({ post, setCurrentId }) => {
             variant="body2"
             color="textSecondary"
             component="p">
-            {post.message.split(' ').splice(0, 20).join(' ')}...
+            {post.message}
           </Typography>
         </CardContent>
       </ButtonBase>
