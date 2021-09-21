@@ -7,7 +7,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
-const Post = () => {
+const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -77,4 +77,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostDetails;
