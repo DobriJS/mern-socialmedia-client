@@ -11,7 +11,11 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
+  const post = useSelector((state) =>
+    currentId
+      ? state.posts.posts.find((p) => p._id === currentId)
+      : null,
+  );
   const user = JSON.parse(localStorage.getItem('profile'));
 
   const [postData, setPostData] = useState({
@@ -22,10 +26,12 @@ const Form = ({ currentId, setCurrentId }) => {
   });
 
   useEffect(() => {
-    if (post) setPostData(post);
+    if (post) {
+      setPostData(post);
+    }
   }, [post]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
@@ -65,7 +71,7 @@ const Form = ({ currentId, setCurrentId }) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? 'Editing' : 'Creating'} a Memory
+          {currentId ? 'Editing' : 'Creating'} a Post
         </Typography>
         <TextField
           name="title"
@@ -73,9 +79,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Title"
           fullWidth
           value={postData.title}
-          onChange={(e) =>
-            setPostData({ ...postData, title: e.target.value })
-          }
+          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
         <TextField
           name="message"
@@ -83,9 +87,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Message"
           fullWidth
           value={postData.message}
-          onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
-          }
+          onChange={(e) => setPostData({ ...postData, message: e.target.value })}
         />
         <TextField
           name="tags"
@@ -93,12 +95,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) =>
-            setPostData({
-              ...postData,
-              tags: e.target.value.split(','),
-            })
-          }
+          onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
         />
         <div className={classes.fileInput}>
           <FileBase64

@@ -34,7 +34,7 @@ const PostDetails = () => {
     }
 
   const openPost = (_id) => history.push(`/posts/${_id}`);
-  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+  const recommendedPosts = posts?.filter(({ _id }) =>  _id !== post._id);
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -56,10 +56,6 @@ const PostDetails = () => {
             {moment(post?.createdAt).fromNow()}
           </Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1"><strong>
-            Divide Test 1</strong>
-          </Typography>
-          <Divider style={{ margin: '20px 0' }} />
           <Typography variant="body1">
             <strong>Divide Test 1</strong>
           </Typography>
@@ -73,30 +69,24 @@ const PostDetails = () => {
             alt={post?.title} />
         </div>
       </div>
-      {!!recommendedPosts.length && (
+      {recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">
-            You might also like:
+						You might also like:
           </Typography>
           <Divider />
           <div className={classes.recommendedPosts}>
-            {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
-              <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
-                <Typography gutterBottom variant="h6">
-                  {title}
-                </Typography>
-                <Typography gutterBottom variant="subtitle2">
-                  {name}
-                </Typography>
-                <Typography gutterBottom variant="subtitle2">
-                  {message}
-                </Typography>
-                <Typography gutterBottom variant="subtitle1">
-                  Likes: {likes.length}
-                </Typography>
-                <img src={selectedFile} width="200px" />
-              </div>
-            ))}
+            {recommendedPosts.map(
+              ({ title, message, name, likes, selectedFile, _id }) => (
+                <div key={_id} style={{ margin: '20px', cursor: 'pointer'}} onClick={() => openPost(_id)}>
+                  <Typography gutterBottom variant="h6">{title}</Typography>
+                  <Typography gutterBottom variant="subtitle2">{name}</Typography>
+                  <Typography gutterBottom variant="subtitle2">{message}</Typography>
+                  <Typography gutterBottom variant="subtitle1">	Likes: {likes.length}</Typography>
+                  <img src={selectedFile} width="200px" />
+                </div>
+              ),
+            )}
           </div>
         </div>
       )}

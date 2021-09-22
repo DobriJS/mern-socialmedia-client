@@ -32,10 +32,7 @@ const Home = () => {
     if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
       history.push(
-        `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(
-          ',',
-        )}`,
-      );
+        `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
     } else {
       history.push('/');
     }
@@ -59,7 +56,7 @@ const Home = () => {
           className={classes.gridContainer}
           justifyContent="space-between"
           alignItems="stretch"
-          spacing={3}
+          spacing={2}
         >
           <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
@@ -73,13 +70,11 @@ const Home = () => {
               <TextField
                 name="search"
                 variant="outlined"
-                label="Search Memories"
+                label="Search Posts"
                 onKeyPress={handleKeyPress}
                 fullWidth
                 value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <TextField
                 name="Search Tags"
@@ -118,6 +113,7 @@ const Home = () => {
                 }}
               />
               <Button
+                variant="contained"
                 onClick={searchPost}
                 className={classes.searchButton}
                 color="primary"

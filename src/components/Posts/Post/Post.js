@@ -44,60 +44,46 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
-      <ButtonBase
-        component="span"
-        name="test"
-        className={classes.cardAction}
-        onClick={openPost}
-      >
+      <ButtonBase className={classes.cardAction} onClick={openPost}>
         <CardMedia
           className={classes.media}
           image={post.selectedFile ? post.selectedFile : defaultImg}
           title={post.title}
         />
         <div className={classes.overlay}>
-          <Typography variant="h6">
-            {post.name}
-          </Typography>
-          <Typography variant="body2">
-            {moment(post.createdAt).fromNow()}
-          </Typography>
+          <Typography variant="h6">{post.name}</Typography>
+          <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
         </div>
-
         <div className={classes.overlay2}>
-          {(user?.result?.googleId === post?.creator ||
-						user?.result?._id === post?.creator) && (
+          {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
             <Button
               style={{ color: 'white' }}
               size="small"
-              onClick={() => {
-                setCurrentId(post._id);
-              }}
+              onClick={() => {setCurrentId(post._id);}}
             >
               <MoreHorizIcon fontSize="medium" />
             </Button>
           )}
         </div>
-
         <div className={classes.details}>
           <Typography
             variant="body2"
-            color="textSecondary"
-            component="h2">{post.tags.map((tag) => `#${tag} `)}
+            color="textSecondary">
+            {post.tags.map((tag) => `#${tag} `)}
           </Typography>
         </div>
         <Typography
           className={classes.title}
           gutterBottom
-          variant="h5"
-          component="h2">
+          variant="h5">
           {post.title}
         </Typography>
         <CardContent>
           <Typography
             variant="body2"
             color="textSecondary"
-            component="p">
+            component="p"
+            gutterBottom>
             {post.message}
           </Typography>
         </CardContent>
@@ -113,9 +99,10 @@ const Post = ({ post, setCurrentId }) => {
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
           <Button
             size="small"
-            color="secondary"
+            color="primary"
             onClick={() => dispatch(deletePost(post._id))}>
-            <DeleteIcon fontSize="small" /> &nbsp; Delete
+            <DeleteIcon fontSize="small" />
+            Delete
           </Button>
         )}
       </CardActions>
