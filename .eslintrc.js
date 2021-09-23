@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
+    es2021: true,
   },
   extends: [
     'eslint:recommended',
@@ -11,16 +11,19 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 12,
     sourceType: 'module',
   },
-  'parser': 'babel-eslint',
   plugins: [
     'react',
   ],
   'rules': {
     'no-unused-vars': 'warn',
-    'indent': ['error', 2],
+    'indent': [
+      'error', 2,
+      { 'ignoredNodes': ['TemplateLiteral'] },
+    ],
+    'template-curly-spacing': 'off',
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
     'eol-last': ['error', 'always'],
