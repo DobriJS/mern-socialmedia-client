@@ -93,16 +93,12 @@ const Home = () => {
 										  <Chip
 										    key={tag}
 										    style={{ margin: '10px 0' }}
-										    onDelete={() =>
-										      handleDelete(tag)
-										    }
+										    onDelete={() => handleDelete(tag)}
 										    label={tag}
 										    variant="outlined"
 										  />
 										)),
-                  onChange: (event) => {
-                    setOnChangeTag(event.target.value);
-                  },
+                  onChange: (event) => {setOnChangeTag(event.target.value);},
                   onKeyPress: (event) => {
                     if (event.key === 'Enter') {
                       setTags([...tags, onChangeTag]);

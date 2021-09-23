@@ -44,17 +44,25 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
+
       <ButtonBase className={classes.cardAction} onClick={openPost}>
+
         <CardMedia
           className={classes.media}
           image={post.selectedFile ? post.selectedFile : defaultImg}
           title={post.title}
         />
+
         <div className={classes.overlay}>
+
           <Typography variant="h6">{post.name}</Typography>
+
           <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+
         </div>
+
         <div className={classes.overlay2}>
+
           {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
             <Button
               style={{ color: 'white' }}
@@ -65,30 +73,29 @@ const Post = ({ post, setCurrentId }) => {
             </Button>
           )}
         </div>
+
         <div className={classes.details}>
+
           <Typography
             variant="body2"
             color="textSecondary">
             {post.tags.map((tag) => `#${tag} `)}
+
           </Typography>
         </div>
-        <Typography
-          className={classes.title}
-          gutterBottom
-          variant="h5">
-          {post.title}
-        </Typography>
+
+        <Typography className={classes.title} gutterBottom variant="h5">{post.title}</Typography>
+
         <CardContent>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            gutterBottom>
-            {post.message}
-          </Typography>
+
+          <Typography variant="body2" color="textSecondary" component="p" gutterBottom>{post.message}</Typography>
+
         </CardContent>
+
       </ButtonBase>
+
       <CardActions className={classes.cardActions}>
+
         <Button
           size="small"
           color="primary"
@@ -96,6 +103,7 @@ const Post = ({ post, setCurrentId }) => {
           onClick={() => dispatch(likePost(post._id))}>
           <Likes />
         </Button>
+
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
           <Button
             size="small"
@@ -105,7 +113,9 @@ const Post = ({ post, setCurrentId }) => {
             Delete
           </Button>
         )}
+
       </CardActions>
+
     </Card>
   );
 };

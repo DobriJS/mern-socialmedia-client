@@ -84,7 +84,7 @@ const Auth = () => {
                 />
                 <Input
                   name="lastName"
-                  label="lastName"
+                  label="Last Name"
                   handleChange={handleChange}
                   autoFocus
                   half
@@ -108,7 +108,7 @@ const Auth = () => {
             />
             {isSignup && (
               <Input
-                name="confirmPassword"
+                name="repeatPassword"
                 label="Repeat Password"
                 handleChange={handleChange}
                 type="password"
