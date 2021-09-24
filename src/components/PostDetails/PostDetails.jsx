@@ -24,6 +24,8 @@ const PostDetails = () => {
     }
   }, [post]);
 
+  const openPost = (_id) => history.push(`/posts/${_id}`);
+
   if (posts)
     if (isLoading) {
       return (
@@ -33,8 +35,7 @@ const PostDetails = () => {
       );
     }
 
-  const openPost = (_id) => history.push(`/posts/${_id}`);
-  const recommendedPosts = posts?.filter(({ _id }) =>  _id !== post._id);
+  const recommendedPosts = posts.filter(({ _id }) =>  _id !== post._id);
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -55,11 +56,6 @@ const PostDetails = () => {
           <Typography variant="body1">
             {moment(post?.createdAt).fromNow()}
           </Typography>
-          <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1">
-            <strong>Divide Test 1</strong>
-          </Typography>
-          <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
           <img
@@ -82,7 +78,7 @@ const PostDetails = () => {
                   <Typography gutterBottom variant="h6">{title}</Typography>
                   <Typography gutterBottom variant="subtitle2">{name}</Typography>
                   <Typography gutterBottom variant="subtitle2">{message}</Typography>
-                  <Typography gutterBottom variant="subtitle1">	Likes: {likes.length}</Typography>
+                  <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
                   <img src={selectedFile} width="200px" />
                 </div>
               ),

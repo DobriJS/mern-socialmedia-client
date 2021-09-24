@@ -25,17 +25,12 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const handleShowPassword = () =>
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+  const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (isSignup) {
-      dispatch(signup(formData, history));
-    } else {
-      dispatch(signin(formData, history));
-    }
+    isSignup ?
+      dispatch(signup(formData, history)) : dispatch(signin(formData, history));
   };
 
   const handleChange = (e) => {
@@ -51,7 +46,6 @@ const Auth = () => {
 
     try {
       dispatch({ type: 'AUTH', data: { result, token } });
-
       history.push('/');
     } catch (error) {
       console.log(error);
