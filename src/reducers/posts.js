@@ -1,4 +1,4 @@
-import { LOADING_START, LOADING_END, FETCH_BY_SEARCH, FETCH_ALL, FETCH_POST, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import { LOADING_START, LOADING_END, COMMENT, FETCH_BY_SEARCH, FETCH_ALL, FETCH_POST, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
 export default (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {

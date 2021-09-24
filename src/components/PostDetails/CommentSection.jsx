@@ -1,15 +1,21 @@
 import React, { useState, useRef } from 'react';
 import { Typography, TextField, Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+import { commentPost } from '../../actions/posts';
 import useStyles from './styles';
 
 const commentSection = ({ post }) => {
+  const user = JSON.parse(localStorage.getItem('profile'));
   const classes = useStyles();
-  const [comments, setComments] = useState([1, 2, 3, 4]);
+  const dispatch = useDispatch();
+  const [comments, setComments] = useState(post?.comments);
   const [comment, setComment] = useState('');
+  const commentsRef = useRef();
 
   const handleClick = async () => {
-
+    const finalComment = `${user.result.name}: ${comment}`;
+    dispatch(commentPost(finalComment, post._id, setComments, commentsRef));
+    setComment('');
   };
   return (
     <div>
@@ -18,9 +24,11 @@ const commentSection = ({ post }) => {
           <Typography gutterBottom variant="h6">Comments</Typography>
           {comments?.map((c, i) => (
             <Typography key={i} gutterBottom variant="subtitle1">
-            Comment {i}
+              <strong>{c.split(': ')[0]}</strong>
+              {c.split(': ')[1]}
             </Typography>
           ))}
+          <div ref={commentsRef} />
         </div>
         <div style={{ width: '70%' }}>
           <Typography gutterBottom variant="h6">Write a comment</Typography>
