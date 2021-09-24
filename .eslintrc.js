@@ -4,7 +4,6 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'eslint:recommended',
     'plugin:react/recommended',
   ],
   parserOptions: {
@@ -18,7 +17,6 @@ module.exports = {
     'react',
   ],
   'rules': {
-    'no-unused-vars': 'warn',
     'indent': [
       'error', 2,
       { 'ignoredNodes': ['TemplateLiteral'] },
