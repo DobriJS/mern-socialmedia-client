@@ -38,11 +38,11 @@ const Navbar = () => {
           className={classes.heading}
           variant="h2"
           align="center">
-        Feed
+        FEED Social Media
         </Typography>
       </div>
       <Toolbar className={classes.toolbar}>
-        {user ? (
+        {user?.result ? (
           <div className={classes.profile}>
             <Avatar
               className={classes.purple}
