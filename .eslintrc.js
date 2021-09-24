@@ -18,7 +18,6 @@ module.exports = {
     'react',
   ],
   'rules': {
-    'no-unused-vars': 'warn',
     'indent': [
       'error', 2,
       { 'ignoredNodes': ['TemplateLiteral'] },
