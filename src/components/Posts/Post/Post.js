@@ -40,7 +40,9 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
-  const openPost = () => history.push(`/posts/${post._id}`);
+  const openPost = () => {
+    history.push(`/posts/${post._id}`);
+  };
 
   return (
     <Card className={classes.card} raised elevation={6}>
@@ -91,7 +93,7 @@ const Post = ({ post, setCurrentId }) => {
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
           <Button
             size="small"
-            color="primary"
+            color="secondary"
             onClick={() => dispatch(deletePost(post._id))}>
             <DeleteIcon fontSize="small" />
             Delete

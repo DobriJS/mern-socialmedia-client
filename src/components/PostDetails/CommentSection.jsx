@@ -13,7 +13,7 @@ const commentSection = ({ post }) => {
   const commentsRef = useRef();
 
   const handleClick = async () => {
-    const finalComment = `${user.result.name}: ${comment}`;
+    const finalComment = `${user.result.name}:  ${comment}`;
     dispatch(commentPost(finalComment, post._id, setComments, commentsRef));
     setComment('');
   };
