@@ -10,7 +10,6 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-
   const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId): null);
   const user = JSON.parse(localStorage.getItem('profile'));
 
@@ -30,12 +29,12 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentId) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
-      clear();
-    } else {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
+    } else {
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
     }
+    clear();
   };
 
   const clear = () => {
@@ -67,7 +66,7 @@ const Form = ({ currentId, setCurrentId }) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? 'Editing' : 'Creating'} a Post
+          {currentId ? 'Edit' : 'Create'} a Post
         </Typography>
         <TextField
           name="title"
