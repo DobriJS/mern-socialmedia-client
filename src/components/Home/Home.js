@@ -89,7 +89,6 @@ const Home = () => {
                   startAdornment:
 										tags.length !== 0 &&
 										tags.map((tag) => (
-										  // eslint-disable-next-line no-mixed-spaces-and-tabs
 										  <Chip key={tag} style={{ margin: '10px 0' }} onDelete={() => handleDelete(tag)} label={tag} variant="outlined"/>)),
                   onChange: (event) => {setOnChangeTag(event.target.value);},
                   onKeyPress: (event) => {

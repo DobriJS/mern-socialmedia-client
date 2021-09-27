@@ -102,7 +102,7 @@ const Auth = () => {
             />
             {isSignup && (
               <Input
-                name="repeatPassword"
+                name="confirmPassword"
                 label="Repeat Password"
                 handleChange={handleChange}
                 type="password"

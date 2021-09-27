@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase } from '@material-ui/core/';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
@@ -17,6 +17,19 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem('profile'));
+  const [likes, setLikes] = useState(post?.likes);
+
+  const userId = user?.result?.googleId || user?.result?._id;
+  const hasLikedPost = likes.find((like) => like === userId);
+
+  const handleLike = () => {
+    dispatch(likePost(post._id));
+    if (hasLikedPost) {
+      setLikes(likes.filter((id) => id !== userId));
+    } else {
+      setLikes([...likes, userId]);
+    }
+  };
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -87,7 +100,8 @@ const Post = ({ post, setCurrentId }) => {
           size="small"
           color="primary"
           disabled={!user?.result}
-          onClick={() => dispatch(likePost(post._id))}>
+          onClick={handleLike}
+        >
           <Likes />
         </Button>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
