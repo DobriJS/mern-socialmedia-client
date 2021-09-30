@@ -9,7 +9,7 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 const PostDetails = () => {
-  const { post, posts, isLoading } = useSelector((state) => state.posts);
+  const { post, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const classes = useStyles();
   const { id } = useParams();
@@ -24,14 +24,13 @@ const PostDetails = () => {
     }
   }, [post]);
 
-  if (posts)
-    if (isLoading) {
-      return (
-        <Paper elevation={6} className={classes.loadingPaper}>
-          <CircularProgress size="7em" />
-        </Paper>
-      );
-    }
+  if (isLoading) {
+    return (
+      <Paper elevation={6} className={classes.loadingPaper}>
+        <CircularProgress size="7em" />
+      </Paper>
+    );
+  }
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
