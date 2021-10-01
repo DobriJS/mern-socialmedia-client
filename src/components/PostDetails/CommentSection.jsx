@@ -4,16 +4,17 @@ import { useDispatch } from 'react-redux';
 import { commentPost } from '../../actions/posts';
 import useStyles from './styles';
 
-const commentSection = ({ post }) => {
-  const user = JSON.parse(localStorage.getItem('profile'));
+const CommentSection = ({ post }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [comments, setComments] = useState(post?.comments);
-  const [comment, setComment] = useState('');
   const commentsRef = useRef();
 
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const [comments, setComments] = useState(post?.comments);
+  const [comment, setComment] = useState('');
+
   const handleClick = async () => {
-    const finalComment = `${user.result.name}:  ${comment}`;
+    const finalComment = `${user.result.name}: ${comment}`;
     dispatch(commentPost(finalComment, post._id, setComments, commentsRef));
     setComment('');
   };
@@ -41,6 +42,7 @@ const commentSection = ({ post }) => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
+          <br />
           <Button
             color="primary"
             style={{ marginTop: '10px' }}
@@ -57,4 +59,4 @@ const commentSection = ({ post }) => {
   );
 };
 
-export default commentSection;
+export default CommentSection;

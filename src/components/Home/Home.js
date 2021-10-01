@@ -15,15 +15,16 @@ function useQuery() {
 }
 
 const Home = () => {
-  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
   const query = useQuery();
   const history = useHistory();
+
+  const [currentId, setCurrentId] = useState(null);
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
   const [search, setSearch] = useState('');
-  // Tags
+
   const [onChangeTag, setOnChangeTag] = useState('');
   const [tags, setTags] = useState([]);
   const tagRef = useRef(null);
@@ -39,14 +40,12 @@ const Home = () => {
   };
 
   const handleKeyPress = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
       searchPost();
     }
   };
 
-  const handleDelete = () => {
-    setTags([]);
-  };
+  const handleDelete = () => setTags([]);
 
   return (
     <Grow in>
@@ -89,10 +88,16 @@ const Home = () => {
                   startAdornment:
 										tags.length !== 0 &&
 										tags.map((tag) => (
-										  <Chip key={tag} style={{ margin: '10px 0' }} onDelete={() => handleDelete(tag)} label={tag} variant="outlined"/>)),
-                  onChange: (event) => {setOnChangeTag(event.target.value);},
-                  onKeyPress: (event) => {
-                    if (event.key === 'Enter') {
+										  <Chip
+										    key={tag}
+										    style={{ margin: '10px 0' }}
+										    onDelete={() => handleDelete(tag)}
+										    label={tag}
+										    variant="outlined"
+										  />)),
+                  onChange: (e) => {setOnChangeTag(e.target.value);},
+                  onKeyPress: (e) => {
+                    if (e.key === 'Enter') {
                       setTags([...tags, onChangeTag]);
                       setOnChangeTag('');
                       tagRef.current.value = '';
@@ -101,9 +106,9 @@ const Home = () => {
                 }}
               />
               <Button
+                className={classes.searchButton}
                 variant="contained"
                 onClick={searchPost}
-                className={classes.searchButton}
                 color="primary"
               >
 								Search

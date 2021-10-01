@@ -16,13 +16,13 @@ const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
   const user = JSON.parse(localStorage.getItem('profile'));
   const [likes, setLikes] = useState(post?.likes);
-
   const userId = user?.result?.googleId || user?.result?._id;
   const hasLikedPost = likes.find((like) => like === userId);
 
-  const handleLike = () => {
+  const handleLike = async () => {
     dispatch(likePost(post._id));
     if (hasLikedPost) {
       setLikes(likes.filter((id) => id !== userId));
@@ -32,32 +32,32 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const Likes = () => {
-    if (post.likes.length > 0) {
-      return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-        ? (
-          <>
-            <ThumbUpAltIcon fontSize="small" />
-            &nbsp;{post.likes.length > 2
-              ? `You and ${post.likes.length - 1} others`
-              : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }
-          </>
-        ) : (
-          <>
-            <ThumbUpAltOutlined fontSize="small" />
-            &nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
-          </>
-        );
+    if (likes?.length > 0) {
+      return likes.find((like) => like === userId) ? (
+        <>
+          <ThumbUpAltIcon fontSize="small" />
+					&nbsp;
+          {likes.length > 2
+            ? `You and ${likes.length - 1} others`
+            : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
+        </>
+      ) : (
+        <>
+          <ThumbUpAltOutlined fontSize="small" />
+					&nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
+        </>
+      );
     }
+
     return (
       <>
-        <ThumbUpAltOutlined fontSize="small" />&nbsp;Like
+        <ThumbUpAltOutlined fontSize="small" />
+				&nbsp;Like
       </>
     );
   };
 
-  const openPost = () => {
-    history.push(`/posts/${post._id}`);
-  };
+  const openPost = () => history.push(`/posts/${post._id}`);
 
   return (
     <Card className={classes.card} raised elevation={6}>
@@ -94,7 +94,8 @@ const Post = ({ post, setCurrentId }) => {
         </div>
         <Typography className={classes.title} gutterBottom variant="h5">{post.title}</Typography>
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p" gutterBottom>{post.message}</Typography>
+          <Typography variant="body2" color="textSecondary" component="p" gutterBottom>
+            {post.message.split(' ').splice(0, 20).join(' ')}...</Typography>
         </CardContent>
       </ButtonBase>
       <CardActions className={classes.cardActions}>

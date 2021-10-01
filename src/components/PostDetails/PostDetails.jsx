@@ -9,9 +9,9 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 const PostDetails = () => {
-  const { post, isLoading } = useSelector((state) => state.posts);
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { post, isLoading } = useSelector((state) => state.posts);
   const { id } = useParams();
 
   useEffect(() => {

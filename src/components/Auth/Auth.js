@@ -10,15 +10,22 @@ import { signin, signup } from '../../actions/auth';
 import Icon from './icon';
 import useStyles from './styles';
 
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const initialState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
 
 const Auth = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState(initialState);
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
@@ -29,8 +36,11 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    isSignup ?
-      dispatch(signup(formData, history)) : dispatch(signin(formData, history));
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
   };
 
   const handleChange = (e) => {
@@ -110,11 +120,11 @@ const Auth = () => {
             )}
           </Grid>
           <Button
+            className={classes.submit}
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
           >
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
