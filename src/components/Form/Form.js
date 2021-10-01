@@ -10,9 +10,9 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
   const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId): null);
   const user = JSON.parse(localStorage.getItem('profile'));
-
   const [postData, setPostData] = useState({
     title: '',
     message: '',
@@ -60,9 +60,9 @@ const Form = ({ currentId, setCurrentId }) => {
   return (
     <Paper className={classes.paper} elevation={6}>
       <form
+        className={`${classes.root} ${classes.form}`}
         autoComplete="off"
         noValidate
-        className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
