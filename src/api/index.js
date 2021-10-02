@@ -1,7 +1,7 @@
 import axios from 'axios';
 //'https://mern-social-media-feed.herokuapp.com/'
 
-const API = axios.create({ baseURL: 'https://mern-social-media-feed.herokuapp.com' });
+const API = axios.create({ baseURL: 'https://mern-social-media-feed.herokuapp.com/posts' });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
