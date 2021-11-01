@@ -23,10 +23,13 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Instructions
-<p align="center">
+
 <img width="320" height="420" src="https://github.com/DobriJS/mern-socialmedia-client/blob/master/src/assets/signup.jpg" alt="signup" />
 <img src="https://github.com/DobriJS/mern-socialmedia-client/blob/master/src/assets/signin.png" alt="signin" />
-</p>
+<img src="https://github.com/DobriJS/mern-socialmedia-client/blob/master/src/assets/post_form.png" alt="post_form" />
+<img src="https://github.com/DobriJS/mern-socialmedia-client/blob/master/src/assets/search.png" alt="search" />
+<img src="https://github.com/DobriJS/mern-socialmedia-client/blob/master/src/assets/info.jpg" alt="info" />
+
 
 
 
