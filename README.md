@@ -15,7 +15,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1. cd to the repo
 2. `yarn run [script] [<args>]` or `npm start`
 3. Open http://localhost:3000 to view it in the browser.
-4. Other available scripts: `npm test` `npm run build` `npm run eject`
+4. Other available scripts: `npm test`, `npm run build`, `npm run eject`
 
 ## :arrow_down: Instructions
 
