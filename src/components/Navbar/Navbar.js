@@ -37,8 +37,9 @@ const Navbar = () => {
           to="/"
           className={classes.heading}
           variant="h2"
-          align="center">
-        FEED Social Media
+          align="center"
+        >
+          FEED Social Media
         </Typography>
       </div>
       <Toolbar className={classes.toolbar}>
@@ -60,7 +61,7 @@ const Navbar = () => {
               color="secondary"
               onClick={logout}
             >
-							Logout
+              Logout
             </Button>
           </div>
         ) : (
@@ -70,7 +71,7 @@ const Navbar = () => {
             variant="contained"
             color="primary"
           >
-						Sign in
+            Sign in
           </Button>
         )}
       </Toolbar>

@@ -1,4 +1,15 @@
-import { LOADING_START, COMMENT, LOADING_END, FETCH_ALL, FETCH_POST, CREATE, UPDATE, DELETE, LIKE, FETCH_BY_SEARCH } from '../constants/actionTypes';
+import {
+  LOADING_START,
+  COMMENT,
+  LOADING_END,
+  FETCH_ALL,
+  FETCH_POST,
+  CREATE,
+  UPDATE,
+  DELETE,
+  LIKE,
+  FETCH_BY_SEARCH,
+} from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const getPost = (id) => async (dispatch) => {
@@ -26,7 +37,9 @@ export const getPosts = (page) => async (dispatch) => {
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_START });
-    const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+    const {
+      data: { data },
+    } = await api.fetchPostsBySearch(searchQuery);
     dispatch({ type: LOADING_END });
     dispatch({ type: FETCH_BY_SEARCH, payload: data });
   } catch (error) {
@@ -73,13 +86,14 @@ export const likePost = (id) => async (dispatch) => {
   }
 };
 
-export const commentPost = (value, id, setComments, commentsRef) => async (dispatch) => {
-  try {
-    const { data } = await api.commentPost(value, id);
-    dispatch({ type: COMMENT, payload: data });
-    setComments(data.comments);
-    commentsRef.current.scrollIntoView({ behavior: 'smooth' });
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const commentPost =
+  (value, id, setComments, commentsRef) => async (dispatch) => {
+    try {
+      const { data } = await api.commentPost(value, id);
+      dispatch({ type: COMMENT, payload: data });
+      setComments(data.comments);
+      commentsRef.current.scrollIntoView({ behavior: 'smooth' });
+    } catch (error) {
+      console.log(error);
+    }
+  };

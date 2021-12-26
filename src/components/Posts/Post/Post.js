@@ -1,5 +1,13 @@
-import React, {useState} from 'react';
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase } from '@material-ui/core/';
+import React, { useState } from 'react';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+  ButtonBase,
+} from '@material-ui/core/';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -36,7 +44,7 @@ const Post = ({ post, setCurrentId }) => {
       return likes.find((like) => like === userId) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
-					&nbsp;
+          &nbsp;
           {likes.length > 2
             ? `You and ${likes.length - 1} others`
             : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
@@ -44,7 +52,7 @@ const Post = ({ post, setCurrentId }) => {
       ) : (
         <>
           <ThumbUpAltOutlined fontSize="small" />
-					&nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
+          &nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
         </>
       );
     }
@@ -52,7 +60,7 @@ const Post = ({ post, setCurrentId }) => {
     return (
       <>
         <ThumbUpAltOutlined fontSize="small" />
-				&nbsp;Like
+        &nbsp;Like
       </>
     );
   };
@@ -61,7 +69,11 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
-      <ButtonBase component="span" className={classes.cardAction} onClick={openPost}>
+      <ButtonBase
+        component="span"
+        className={classes.cardAction}
+        onClick={openPost}
+      >
         <CardMedia
           className={classes.media}
           image={post.selectedFile ? post.selectedFile : defaultImg}
@@ -69,10 +81,13 @@ const Post = ({ post, setCurrentId }) => {
         />
         <div className={classes.overlay}>
           <Typography variant="h6">{post.name}</Typography>
-          <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+          <Typography variant="body2">
+            {moment(post.createdAt).fromNow()}
+          </Typography>
         </div>
         <div className={classes.overlay2}>
-          {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+          {(user?.result?.googleId === post?.creator ||
+            user?.result?._id === post?.creator) && (
             <Button
               style={{ color: 'white' }}
               size="small"
@@ -86,16 +101,22 @@ const Post = ({ post, setCurrentId }) => {
           )}
         </div>
         <div className={classes.details}>
-          <Typography
-            variant="body2"
-            color="textSecondary">
+          <Typography variant="body2" color="textSecondary">
             {post.tags.map((tag) => `#${tag} `)}
           </Typography>
         </div>
-        <Typography className={classes.title} gutterBottom variant="h5">{post.title}</Typography>
+        <Typography className={classes.title} gutterBottom variant="h5">
+          {post.title}
+        </Typography>
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p" gutterBottom>
-            {post.message.split(' ').splice(0, 20).join(' ')}...</Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            gutterBottom
+          >
+            {post.message.split(' ').splice(0, 20).join(' ')}...
+          </Typography>
         </CardContent>
       </ButtonBase>
       <CardActions className={classes.cardActions}>
@@ -107,17 +128,18 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+        {(user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator) && (
           <Button
             size="small"
             color="secondary"
-            onClick={() => dispatch(deletePost(post._id))}>
+            onClick={() => dispatch(deletePost(post._id))}
+          >
             <DeleteIcon fontSize="small" />
             Delete
           </Button>
         )}
       </CardActions>
-
     </Card>
   );
 };

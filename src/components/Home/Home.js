@@ -2,7 +2,16 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Container, Grow, Grid, Paper, AppBar, TextField, Button, Chip } from '@material-ui/core';
+import {
+  Container,
+  Grow,
+  Grid,
+  Paper,
+  AppBar,
+  TextField,
+  Button,
+  Chip,
+} from '@material-ui/core';
 
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
@@ -33,7 +42,8 @@ const Home = () => {
     if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
       history.push(
-        `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
+        `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`
+      );
     } else {
       history.push('/');
     }
@@ -86,16 +96,19 @@ const Home = () => {
                 inputRef={tagRef}
                 InputProps={{
                   startAdornment:
-										tags.length !== 0 &&
-										tags.map((tag) => (
-										  <Chip
-										    key={tag}
-										    style={{ margin: '10px 0' }}
-										    onDelete={() => handleDelete(tag)}
-										    label={tag}
-										    variant="outlined"
-										  />)),
-                  onChange: (e) => {setOnChangeTag(e.target.value);},
+                    tags.length !== 0 &&
+                    tags.map((tag) => (
+                      <Chip
+                        key={tag}
+                        style={{ margin: '10px 0' }}
+                        onDelete={() => handleDelete(tag)}
+                        label={tag}
+                        variant="outlined"
+                      />
+                    )),
+                  onChange: (e) => {
+                    setOnChangeTag(e.target.value);
+                  },
                   onKeyPress: (e) => {
                     if (e.key === 'Enter') {
                       setTags([...tags, onChangeTag]);
@@ -111,13 +124,10 @@ const Home = () => {
                 onClick={searchPost}
                 color="primary"
               >
-								Search
+                Search
               </Button>
             </AppBar>
-            <Form
-              currentId={currentId}
-              setCurrentId={setCurrentId}
-            />
+            <Form currentId={currentId} setCurrentId={setCurrentId} />
             {!searchQuery && !tags.length && (
               <Paper className={classes.pagination} elevation={6}>
                 <Pagination page={page} />

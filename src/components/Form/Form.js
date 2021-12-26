@@ -11,7 +11,9 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId): null);
+  const post = useSelector((state) =>
+    currentId ? state.posts.posts.find((p) => p._id === currentId) : null
+  );
   const user = JSON.parse(localStorage.getItem('profile'));
   const [postData, setPostData] = useState({
     title: '',
@@ -29,7 +31,9 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentId) {
-      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
       clear();
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }, history));
@@ -82,7 +86,9 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Message"
           fullWidth
           value={postData.message}
-          onChange={(e) => setPostData({ ...postData, message: e.target.value })}
+          onChange={(e) =>
+            setPostData({ ...postData, message: e.target.value })
+          }
         />
         <TextField
           name="tags"
@@ -90,7 +96,9 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
+          onChange={(e) =>
+            setPostData({ ...postData, tags: e.target.value.split(',') })
+          }
         />
         <div className={classes.fileInput}>
           <FileBase64
@@ -112,7 +120,7 @@ const Form = ({ currentId, setCurrentId }) => {
           type="submit"
           fullWidth
         >
-					Submit
+          Submit
         </Button>
         <Button
           variant="contained"
@@ -121,7 +129,7 @@ const Form = ({ currentId, setCurrentId }) => {
           onClick={clear}
           fullWidth
         >
-					Clear
+          Clear
         </Button>
       </form>
     </Paper>

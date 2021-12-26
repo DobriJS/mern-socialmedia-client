@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
+import {
+  Avatar,
+  Button,
+  Paper,
+  Grid,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { GoogleLogin } from 'react-google-login';
 
@@ -32,7 +39,8 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
+  const handleShowPassword = () =>
+    setShowPassword((prevShowPassword) => !prevShowPassword);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,9 +80,7 @@ const Auth = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant="h5">
-          {isSignup ? 'Sign Up' : 'Sign In'}
-        </Typography>
+        <Typography variant="h5">{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isSignup && (
@@ -140,7 +146,7 @@ const Auth = () => {
                 startIcon={<Icon />}
                 variant="contained"
               >
-								Google Sign In
+                Google Sign In
               </Button>
             )}
             onSuccess={googleSuccess}
@@ -152,7 +158,7 @@ const Auth = () => {
               <Button onClick={switchMode}>
                 {isSignup
                   ? 'Already have an account? Sign In'
-                  : 'Don\'t have an account? Sign Up'}
+                  : "Don't have an account? Sign Up"}
               </Button>
             </Grid>
           </Grid>
