@@ -1,8 +1,9 @@
 import axios from 'axios';
 //'https://mern-social-media-feed.herokuapp.com/'
+//'http://localhost:4000'
 
 const API = axios.create({
-  baseURL: 'https://mern-social-media-feed.herokuapp.com/',
+  baseURL: 'http://localhost:4000/'
 });
 
 API.interceptors.request.use((req) => {

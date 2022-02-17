@@ -8,7 +8,7 @@ import {
   UPDATE,
   DELETE,
   LIKE,
-  FETCH_BY_SEARCH,
+  FETCH_BY_SEARCH
 } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
@@ -38,7 +38,7 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_START });
     const {
-      data: { data },
+      data: { data }
     } = await api.fetchPostsBySearch(searchQuery);
     dispatch({ type: LOADING_END });
     dispatch({ type: FETCH_BY_SEARCH, payload: data });

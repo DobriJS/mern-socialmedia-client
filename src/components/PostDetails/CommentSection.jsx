@@ -8,7 +8,6 @@ const CommentSection = ({ post }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const commentsRef = useRef();
-
   const user = JSON.parse(localStorage.getItem('profile'));
   const [comments, setComments] = useState(post?.comments);
   const [comment, setComment] = useState('');
@@ -18,6 +17,7 @@ const CommentSection = ({ post }) => {
     dispatch(commentPost(finalComment, post._id, setComments, commentsRef));
     setComment('');
   };
+
   return (
     <div>
       <div className={classes.commentsOuterContainer}>
@@ -28,7 +28,7 @@ const CommentSection = ({ post }) => {
           {comments?.map((c, i) => (
             <Typography key={i} gutterBottom variant="subtitle1">
               <strong>{c.split(': ')[0]}</strong>
-              {c.split(': ')[1]}
+              {c.split(':')[1]}
             </Typography>
           ))}
           <div ref={commentsRef} />
