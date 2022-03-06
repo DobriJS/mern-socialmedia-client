@@ -7,7 +7,7 @@ import {
   Paper,
   Grid,
   Typography,
-  Container,
+  Container
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { GoogleLogin } from 'react-google-login';
@@ -22,7 +22,7 @@ const initialState = {
   lastName: '',
   email: '',
   password: '',
-  confirmPassword: '',
+  confirmPassword: ''
 };
 
 const Auth = () => {
@@ -54,7 +54,7 @@ const Auth = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -158,7 +158,7 @@ const Auth = () => {
               <Button onClick={switchMode}>
                 {isSignup
                   ? 'Already have an account? Sign In'
-                  : 'Don\'t have an account? Sign Up'}
+                  : 'Dont have an account? Sign Up'}
               </Button>
             </Grid>
           </Grid>
